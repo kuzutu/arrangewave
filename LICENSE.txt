@@ -1,0 +1,35 @@
+ArrangeWave — Free License / Ücretsiz Kullanım Koşulları
+Version 58 — November 2026
+
+ArrangeWave ("the Software") is free. No purchase, license key or trial period.
+
+1. Use. You may install and use the Software on any number of computers, for
+   personal or professional music production, at no cost.
+
+2. Sharing. You may share the unmodified installer free of charge. You may not
+   sell the Software or bundle it with something you sell.
+
+3. Your music. Arrangements, MIDI and Ableton Live projects you create with the
+   Software are yours. You may use them in your own releases, commercial or not.
+
+4. Your data. The Software works offline and needs no account. Your projects
+   stay on your computer. No usage data is collected.
+
+5. No warranty. The Software is provided "as is", without warranty of any kind.
+   Keep backups of your projects.
+
+6. Limitation of liability. To the maximum extent permitted by law, the author
+   is not liable for any damages, including loss of data or income, arising
+   from the use of the Software.
+
+7. Trademarks. Ableton and Ableton Live are trademarks of Ableton AG. The name
+   is used only to describe file compatibility. ArrangeWave is not affiliated
+   with, sponsored or endorsed by Ableton.
+
+---
+
+Türkçe özet: ArrangeWave ücretsizdir; lisans anahtarı veya deneme süresi
+yoktur. İstediğiniz kadar bilgisayarda kullanabilir, değiştirmeden ücretsiz
+paylaşabilirsiniz; satamazsınız. Programla ürettiğiniz projeler sizindir.
+Program "olduğu gibi" sunulur. Ableton adı yalnızca uyumluluğu anlatmak
+içindir; ArrangeWave Ableton ile bağlantılı değildir.

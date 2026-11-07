@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ArrangeWave — From a genre idea to a full Ableton Live 12 arrangement</title>
+<meta name="description" content="ArrangeWave is a free app for macOS and Windows that turns a genre idea into a full Ableton Live 12 arrangement: song form, melody, chords, bass, instruments and automation.">
+<meta property="og:title" content="ArrangeWave — Start with a genre. Finish with a song.">
+<meta property="og:description" content="Free for macOS and Windows. 136 genres, 7 moods, opens straight in Ableton Live 12.">
+<meta property="og:image" content="https://kuzutu.github.io/arrangewave/img/01_main_afro_house.jpg">
+<link rel="icon" href="icon-256.png">
+<style>
+:root{
+  --bg:#14171d; --panel:#1d222b; --panel2:#262c37; --line:#323a47;
+  --ink:#e9ecf1; --mute:#9aa3b2; --amber:#efb357; --pink:#d784c0; --blue:#6d93e8; --green:#5cc46a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--amber)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+header.top{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.02em;font-size:19px}
+.brand img{width:30px;height:30px;border-radius:7px}
+.lang{display:flex;gap:6px}
+.lang button{background:transparent;color:var(--mute);border:1px solid var(--line);border-radius:7px;padding:5px 10px;font:600 13px/1 inherit;cursor:pointer}
+.lang button[aria-pressed=true]{color:var(--amber);border-color:var(--amber)}
+.hero{padding:40px 0 28px;text-align:center}
+.hero h1{font-size:clamp(32px,6vw,54px);line-height:1.08;margin:0 0 14px;letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--amber)}
+.hero p.sub{color:var(--mute);font-size:clamp(16px,2.2vw,19px);max-width:660px;margin:0 auto 26px}
+.tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:28px}
+.tags > span{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 12px;font-size:13px}
+.tags > span i{font-style:normal;color:var(--green);margin-right:5px}
+.shot{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--line)}
+.primary{display:inline-flex;flex-direction:column;align-items:center;gap:2px;background:var(--amber);color:#1d1406;text-decoration:none;border-radius:12px;padding:14px 30px;font-weight:700;font-size:18px;margin:28px 0 8px;box-shadow:0 6px 24px rgba(239,179,87,.25)}
+.primary small{font-weight:500;font-size:13px;opacity:.8}
+.primary:hover{filter:brightness(1.07)}
+.hint{color:var(--mute);font-size:14px}
+section{padding:46px 0;border-top:1px solid var(--line)}
+section h2{font-size:26px;margin:0 0 6px}
+section p.lead{color:var(--mute);margin:0 0 24px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+.card h3{margin:0 0 6px;font-size:17px}
+.card p{margin:0;color:var(--mute);font-size:15px}
+.gallery{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.gallery figure{margin:0}
+.gallery figcaption{color:var(--mute);font-size:14px;margin-top:6px}
+.dl{display:flex;flex-direction:column;gap:12px}
+.dl .card{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.dl .card.rec{border-color:var(--amber)}
+.dl .os{display:flex;flex-direction:column}
+.dl .os b{font-size:17px}
+.dl .os > span{color:var(--mute);font-size:14px}
+.badge{display:none;margin-left:8px;font-size:11px;font-weight:700;color:#1d1406;background:var(--amber);border-radius:5px;padding:2px 6px;vertical-align:2px}
+.rec .badge{display:inline-block}
+.btn{background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:10px 18px;text-decoration:none;font-weight:600;white-space:nowrap}
+.btn:hover{border-color:var(--amber);color:var(--amber)}
+.rec .btn{background:var(--amber);color:#1d1406;border-color:var(--amber)}
+.steps{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.steps ol{margin:8px 0 0;padding-left:20px;color:var(--mute);font-size:15px}
+.steps li{margin:0 0 8px}
+.steps li b{color:var(--ink)}
+code,pre{font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:#0e1015;border:1px solid var(--line);border-radius:9px;padding:10px 12px;overflow-x:auto;margin:8px 0 0;white-space:pre-wrap;word-break:break-all}
+details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-top:14px}
+details summary{cursor:pointer;font-weight:600}
+.notice{background:#2a2213;border:1px solid #6b5422;border-radius:12px;padding:18px 20px;text-align:left;margin:18px 0 0}
+.notice h3{margin:0 0 6px;font-size:17px;color:var(--amber)}
+.notice p{margin:0 0 10px;font-size:15px}
+.notice ol{margin:0 0 10px;padding-left:22px;font-size:15px}
+.notice li{margin:0 0 6px}
+.notice .dont{color:#ff8a7a;font-weight:600}
+.notice .small{color:var(--mute);font-size:13px;margin:0}
+.hero .notice{max-width:720px;margin:22px auto 0}
+footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--mute);font-size:13px}
+footer p{margin:0 0 8px}
+[data-l]{display:none}
+html[lang=en] [data-l=en], html[lang=tr] [data-l=tr]{display:revert}
+@media (max-width:560px){ .dl .card{flex-direction:column;align-items:stretch} .btn{text-align:center} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><img src="icon-256.png" alt="">ArrangeWave</div>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-set="en" aria-pressed="true">EN</button>
+      <button type="button" data-set="tr" aria-pressed="false">TR</button>
+    </div>
+  </header>
+
+  <div class="hero">
+    <h1>
+      <span data-l="en">Start with a genre.<br><em>Finish with a song.</em></span>
+      <span data-l="tr">Bir türle başla.<br><em>Bir şarkıyla bitir.</em></span>
+    </h1>
+    <p class="sub">
+      <span data-l="en">ArrangeWave turns a genre idea into a full Ableton Live 12 arrangement: intro, builds, drops, break and outro, with melody, chords, bass and sub written from one shared harmony. Free, offline, no account.</span>
+      <span data-l="tr">ArrangeWave bir tür fikrini eksiksiz bir Ableton Live 12 aranjmanına çevirir: intro, build, drop, break ve outro; melodi, akor, bas ve sub tek bir ortak armoniden yazılır. Ücretsiz, çevrimdışı, hesap gerekmez.</span>
+    </p>
+    <div class="tags">
+      <span><i>✓</i><span data-l="en">100% free</span><span data-l="tr">Tamamen ücretsiz</span></span>
+      <span><i>✓</i><span data-l="en">136 genres · 7 moods</span><span data-l="tr">136 tür · 7 ruh hali</span></span>
+      <span><i>✓</i><span data-l="en">Opens in Ableton Live 12</span><span data-l="tr">Ableton Live 12'de açılır</span></span>
+      <span><i>✓</i>macOS · Windows</span>
+    </div>
+    <img class="shot" src="img/01_main_afro_house.jpg" alt="ArrangeWave main screen with an Afro House plan" width="1600" height="1033">
+    <a class="primary" id="primary" href="#download">
+      <span id="pLabel">Download</span>
+      <small id="pSub">V58</small>
+    </a>
+    <div class="notice" id="mobile" hidden><h3><span data-l="en">On your phone?</span><span data-l="tr">Telefonda mısın?</span></h3><p class="small" style="font-size:15px;color:var(--ink)"><span data-l="en">ArrangeWave runs on a Mac or Windows computer. Open this page there: <b>kuzutu.github.io/arrangewave</b></span><span data-l="tr">ArrangeWave Mac ya da Windows bilgisayarda çalışır. Bu sayfayı bilgisayarında aç: <b>kuzutu.github.io/arrangewave</b></span></p></div>
+    <div class="hint"><span data-l="en">Version 58 · </span><span data-l="tr">Sürüm 58 · </span><a href="#download"><span data-l="en">all downloads</span><span data-l="tr">tüm indirmeler</span></a></div>
+  </div>
+
+  <section>
+    <h2><span data-l="en">What it does</span><span data-l="tr">Neler yapar</span></h2>
+    <p class="lead"><span data-l="en">From an empty project to a finished song structure, in one click.</span><span data-l="tr">Boş bir projeden bitmiş bir şarkı yapısına, tek tıkla.</span></p>
+    <div class="grid">
+      <div class="card"><h3><span data-l="en">Whole-song plan</span><span data-l="tr">Tüm şarkı planı</span></h3><p><span data-l="en">Pick a genre, BPM and length. Every section is laid out with its own energy: tension builds, the drop releases it.</span><span data-l="tr">Tür, BPM ve uzunluğu seç. Her bölüm kendi enerjisiyle dizilir: gerilim yükselir, drop onu çözer.</span></p></div>
+      <div class="card"><h3><span data-l="en">Linked MIDI</span><span data-l="tr">Bağlı MIDI</span></h3><p><span data-l="en">Melody, chords, bass and sub follow the same chords, so nothing clashes.</span><span data-l="tr">Melodi, akor, bas ve sub aynı akorları izler; hiçbiri çatışmaz.</span></p></div>
+      <div class="card"><h3><span data-l="en">Moods</span><span data-l="tr">Ruh hali</span></h3><p><span data-l="en">Groovy, dark, hopeful, bittersweet and more. Each sets the scale, chords and melody character.</span><span data-l="tr">Groovy, karanlık, umutlu, buruk ve fazlası. Her biri gamı, akorları ve melodi karakterini belirler.</span></p></div>
+      <div class="card"><h3><span data-l="en">Grooves per genre</span><span data-l="tr">Türe özgü groove</span></h3><p><span data-l="en">Drums, percussion and bass lines with the pulse of each genre.</span><span data-l="tr">Davul, perküsyon ve bas çizgileri her türün kendi nabzıyla.</span></p></div>
+      <div class="card"><h3><span data-l="en">Ready in Ableton</span><span data-l="tr">Ableton'da hazır</span></h3><p><span data-l="en">Instruments loaded, sidechain routed, automation drawn. Open the project and press play.</span><span data-l="tr">Enstrümanlar yüklü, sidechain bağlı, otomasyon çizili. Projeyi aç ve çal.</span></p></div>
+      <div class="card"><h3><span data-l="en">Your plugins</span><span data-l="tr">Senin eklentilerin</span></h3><p><span data-l="en">Pick your own VST3 / AU instruments for kick, bass, lead and synth.</span><span data-l="tr">Kick, bas, lead ve synth için kendi VST3 / AU enstrümanlarını seç.</span></p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span data-l="en">A look inside</span><span data-l="tr">İçeriden bir bakış</span></h2>
+    <p class="lead"><span data-l="en">Every plan is new. Every note is generated.</span><span data-l="tr">Her plan yeni. Her nota üretilir.</span></p>
+    <div class="gallery">
+      <figure><img class="shot" src="img/06_linked_midi.jpg" alt="" loading="lazy"><figcaption><span data-l="en">Melody, chords and bass from one harmony</span><span data-l="tr">Tek armoniden melodi, akor ve bas</span></figcaption></figure>
+      <figure><img class="shot" src="img/10_settings_mood.jpg" alt="" loading="lazy"><figcaption><span data-l="en">Mood and composition settings</span><span data-l="tr">Ruh hali ve kompozisyon ayarları</span></figcaption></figure>
+      <figure><img class="shot" src="img/03_instruments_mix.jpg" alt="" loading="lazy"><figcaption><span data-l="en">Instruments and mix, ready on export</span><span data-l="tr">Dışa aktarımda hazır enstrüman ve miks</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section id="download">
+    <h2><span data-l="en">Download</span><span data-l="tr">İndir</span></h2>
+    <p class="lead"><span data-l="en">Version 58. Pick the file for your computer. Requires Ableton Live 12 to play the projects.</span><span data-l="tr">Sürüm 58. Bilgisayarına uygun dosyayı seç. Projeleri çalmak için Ableton Live 12 gerekir.</span></p>
+    <div class="dl">
+      <div class="card" data-os="mac">
+        <div class="os"><b>macOS<span class="badge"><span data-l="en">For you</span><span data-l="tr">Senin için</span></span></b><span><span data-l="en">Apple Silicon and Intel · macOS 12 or later · 24 MB</span><span data-l="tr">Apple Silicon ve Intel · macOS 12 ve sonrası · 24 MB</span></span></div>
+        <a class="btn" data-file="ArrangeWave_V58_macOS.dmg"><span data-l="en">Download .dmg</span><span data-l="tr">.dmg indir</span></a>
+      </div>
+      <div class="card" data-os="win">
+        <div class="os"><b>Windows · <span data-l="en">Installer</span><span data-l="tr">Kurulum</span><span class="badge"><span data-l="en">For you</span><span data-l="tr">Senin için</span></span></b><span><span data-l="en">Windows 10 / 11, 64-bit · no admin rights needed · 13 MB</span><span data-l="tr">Windows 10 / 11, 64 bit · yönetici izni gerekmez · 13 MB</span></span></div>
+        <a class="btn" data-file="ArrangeWave_V58_Windows_x64_Setup.exe"><span data-l="en">Download .exe</span><span data-l="tr">.exe indir</span></a>
+      </div>
+    </div>
+    <div class="notice">
+      <h3><span data-l="en">First launch on Mac: one extra step</span><span data-l="tr">Mac'te ilk açılış: bir adım fazlası</span></h3>
+      <p><span data-l="en">ArrangeWave is free and isn't notarized by Apple. The first time you open it, macOS says <b>"ArrangeWave" Not Opened</b>. This is how you open it:</span><span data-l="tr">ArrangeWave ücretsizdir ve Apple'ın noter onayından geçmemiştir. İlk açılışta macOS <b>"ArrangeWave" Açılmadı</b> der. Şöyle açılır:</span></p>
+      <ol>
+        <li><span data-l="en">In that window click <b>Done</b>.</span><span data-l="tr">O pencerede <b>Bitti</b>'ye basın.</span> <span class="dont"><span data-l="en">Don't click "Move to Trash".</span><span data-l="tr">"Çöp Sepeti'ne Taşı"ya basmayın.</span></span></li>
+        <li><span data-l="en">Open <b>System Settings &gt; Privacy &amp; Security</b> and scroll down.</span><span data-l="tr"><b>Sistem Ayarları &gt; Gizlilik ve Güvenlik</b>'i açıp aşağı kaydırın.</span></li>
+        <li><span data-l="en">Next to "ArrangeWave was blocked" click <b>Open Anyway</b>, then confirm.</span><span data-l="tr">"ArrangeWave engellendi" yazısının yanındaki <b>Yine de Aç</b>'a basın ve onaylayın.</span></li>
+      </ol>
+      <p class="small"><span data-l="en">You only do this once. Windows may show "Windows protected your PC": click <b>More info &gt; Run anyway</b>.</span><span data-l="tr">Bunu yalnızca bir kez yaparsınız. Windows "Windows bilgisayarınızı korudu" derse <b>Ek bilgi &gt; Yine de çalıştır</b>'a basın.</span></p>
+    </div>
+    <p class="hint" style="margin-top:14px"><a id="relLink" href="#"><span data-l="en">All releases on GitHub</span><span data-l="tr">GitHub'daki tüm sürümler</span></a></p>
+  </section>
+
+  <section id="install">
+    <h2><span data-l="en">Installing</span><span data-l="tr">Kurulum</span></h2>
+    <div class="steps">
+      <div class="card"><h3>macOS</h3>
+        <ol data-l="en">
+          <li>Open the .dmg and drag <b>ArrangeWave</b> into <b>Applications</b>.</li>
+          <li>Open it from Applications, Launchpad or Spotlight. On first launch follow the steps above.</li>
+          <li>Your projects are saved in <b>Documents &gt; ArrangeWave</b>.</li>
+        </ol>
+        <ol data-l="tr">
+          <li>.dmg dosyasını açın, <b>ArrangeWave</b>'i <b>Uygulamalar</b> klasörüne sürükleyin.</li>
+          <li>Uygulamalar, Launchpad ya da Spotlight'tan açın. İlk açılışta yukarıdaki adımları izleyin.</li>
+          <li>Projeleriniz <b>Belgeler &gt; ArrangeWave</b> klasörüne kaydedilir.</li>
+        </ol>
+        <details><summary><span data-l="en">Still blocked?</span><span data-l="tr">Hâlâ açılmıyor mu?</span></summary>
+          <p class="hint" style="margin:8px 0 0"><span data-l="en">Run this in Terminal:</span><span data-l="tr">Terminal'de şunu çalıştırın:</span></p>
+          <pre>xattr -dr com.apple.quarantine /Applications/ArrangeWave.app</pre>
+        </details>
+      </div>
+      <div class="card"><h3>Windows</h3>
+        <ol data-l="en">
+          <li>Run <b>ArrangeWave_V58_Windows_x64_Setup.exe</b>. No administrator rights or separate Python needed.</li>
+          <li>If SmartScreen says "Windows protected your PC", click <b>More info</b>, then <b>Run anyway</b>.</li>
+          <li>You get Start menu and desktop shortcuts. Shortcuts use Ctrl instead of ⌘.</li>
+        </ol>
+        <ol data-l="tr">
+          <li><b>ArrangeWave_V58_Windows_x64_Setup.exe</b> dosyasını çalıştırın. Yönetici izni ya da ayrı Python gerekmez.</li>
+          <li>SmartScreen "Windows bilgisayarınızı korudu" derse <b>Ek bilgi</b>'ye, sonra <b>Yine de çalıştır</b>'a basın.</li>
+          <li>Başlat menüsüne ve masaüstüne kısayol eklenir. Kısayollar ⌘ yerine Ctrl ile çalışır.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="grid" style="margin-top:14px">
+      <div class="card"><h3><span data-l="en">What you need</span><span data-l="tr">Gerekenler</span></h3><p><span data-l="en">Ableton Live 12. Built-in instruments come from your Core Library; Operator, Analog, Wavetable and similar devices need the matching Live edition.</span><span data-l="tr">Ableton Live 12. Yerleşik enstrümanlar Core Library'den alınır; Operator, Analog, Wavetable gibi cihazlar ilgili Live sürümünü gerektirir.</span></p></div>
+      <div class="card"><h3><span data-l="en">Privacy</span><span data-l="tr">Gizlilik</span></h3><p><span data-l="en">ArrangeWave works offline. No account, no API key, your projects stay on your computer.</span><span data-l="tr">ArrangeWave çevrimdışı çalışır. Hesap ya da API anahtarı yok; projelerin bilgisayarında kalır.</span></p></div>
+    </div>
+    <details><summary><span data-l="en">SHA-256 checksums</span><span data-l="tr">SHA-256 sağlama değerleri</span></summary>
+      <pre>8c56a8ca865a19572f11159cc0fb51607fbbae6c830085a5fae5fd87ee0a6344  ArrangeWave_V58_macOS.dmg
+6f6c291700fe1b3a15810ebc6206d198c1eecdd2652d85f296176e9e37a065f2  ArrangeWave_V58_Windows_x64_Setup.exe</pre>
+    </details>
+  </section>
+
+  <footer>
+    <p><span data-l="en">Produced by Selçuk Kuzu.</span><span data-l="tr">Yapımcı: Selçuk Kuzu.</span> <span data-l="en">Free to use on any number of computers. You may share the unmodified installer free of charge, but not sell it.</span><span data-l="tr">İstediğin kadar bilgisayarda ücretsiz kullanılabilir. Değiştirilmemiş kurulum dosyasını ücretsiz paylaşabilirsin, satamazsın.</span> <a href="LICENSE.txt"><span data-l="en">Full license</span><span data-l="tr">Kullanım koşulları</span></a></p>
+    <p><span data-l="en">Ableton and Ableton Live are trademarks of Ableton AG. ArrangeWave is not affiliated with Ableton; the name only describes file compatibility.</span><span data-l="tr">Ableton ve Ableton Live, Ableton AG'nin markalarıdır. ArrangeWave Ableton ile bağlantılı değildir; ad yalnızca dosya uyumluluğunu anlatır.</span></p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var REPO = 'kuzutu/arrangewave', TAG = 'v58';
+  var base = 'https://github.com/' + REPO + '/releases/download/' + TAG + '/';
+  document.getElementById('relLink').href = 'https://github.com/' + REPO + '/releases';
+  document.querySelectorAll('a[data-file]').forEach(function(a){ a.href = base + a.dataset.file; });
+  var L = {
+    en:{dl:'Download for ', other:'Download', size:'Free · V58 · '},
+    tr:{dl:'İndir: ', other:'İndir', size:'Ücretsiz · V58 · '}
+  };
+  var saved = null; try { saved = localStorage.getItem('aw_site_lang'); } catch(e){}
+  var q = /[?&]lang=(en|tr)/.exec(location.search);
+  var lang = q ? q[1] : saved || ((navigator.language || '').toLowerCase().indexOf('tr') === 0 ? 'tr' : 'en');
+  var ua = navigator.userAgent, os = null;
+  if(/Windows/i.test(ua)) os = 'win';
+  else if(/Macintosh|Mac OS X/i.test(ua) && !/iPhone|iPad/i.test(ua) && !(navigator.maxTouchPoints > 1)) os = 'mac';
+  if(/iPhone|iPad|Android/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1)) document.getElementById('mobile').hidden = false;
+  if(os){ var rc = document.querySelector('[data-os="' + os + '"]'); if(rc) rc.classList.add('rec'); }
+  function apply(l){
+    lang = l; document.documentElement.lang = l;
+    document.querySelectorAll('.lang button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.set === l)); });
+    var t = L[l], p = document.getElementById('primary');
+    if(os){
+      p.href = base + (os === 'win' ? 'ArrangeWave_V58_Windows_x64_Setup.exe' : 'ArrangeWave_V58_macOS.dmg');
+      document.getElementById('pLabel').textContent = t.dl + (os === 'win' ? 'Windows' : 'macOS');
+      document.getElementById('pSub').textContent = t.size + (os === 'win' ? '13 MB' : '24 MB');
+    } else {
+      /* telefondan gelen (Instagram DM linki): indirme bölümüne götür */
+      p.href = '#download'; document.getElementById('pLabel').textContent = t.other; document.getElementById('pSub').textContent = 'macOS · Windows';
+    }
+  }
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.dataset.set); try { localStorage.setItem('aw_site_lang', b.dataset.set); } catch(e){} });
+  });
+  apply(lang);
+})();
+</script>
+</body>
+</html>
